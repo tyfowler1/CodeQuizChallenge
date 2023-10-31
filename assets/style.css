@@ -39,7 +39,10 @@ h1 {
     margin: 20px 0;
 }
 
-button#startButton, button#submitButton {
+
+
+button#startButton, button#submitButton, button#restartButton {
+    
     padding: 10px 20px;
     background-color: #27ae60;
     color: #fff;
@@ -51,7 +54,7 @@ button#startButton:hover, button#submitButton:hover {
     background-color: #219a55;
 }
 
-button#submitButton {
+button#submitButton {   
     background-color: #e74c3c;
 }
 

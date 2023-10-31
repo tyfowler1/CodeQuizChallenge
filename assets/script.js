@@ -1,10 +1,13 @@
+
+
+
 let timerInterval;
 // Questions and Answers
 const questions = [
     {
-        question: "",
-        options: [""],
-        correct: ""
+        question: "Is JavaScript the same as Java",
+        options: ["Yes","No"],
+        correct: "No"
     },
     {
         question: "",
@@ -77,17 +80,66 @@ function endGame() {
     optionsElement.innerHTML = "";
     submitButton.style.display = "block";
     submitButton.addEventListener("click", saveScore);
+    restartButton.style.display = "block";
 }
 
 
+const restartButton = document.getElementById("restartButton");
+restartButton.addEventListener("click", restartGame);
+
+function restartGame() {
+    currentQuestion = 0;
+    score = 0;
+    timeLeft = 60;
+    displayQuestion(); // Should show the first question again 
+    startTimer(); // Restarts the timer
+    restartButton.style.display = "none";
+    submitButton.style.display = "none";
+}
+
+const highScores = [];
 
 
 
-
-
-// Function to save the score to compare highscores
+// This saves your score
 function saveScore() {
     const initials = prompt("Enter your initials:");
-   
-    alert(`Score saved for ${initials}: ${score}`);
+    const scoreData = `${initials}: ${score}`;
+    highScores.push(scoreData);
+
+    // Sorts the scores 
+    highScores.sort((a, b) => b.score - a.score);
+
+    // keeps top 5 scores
+    highScores.splice(5);
+
+    localStorage.setItem("highScores", highScores.join(",")); // Stores the scores as a string
+    displayHighScores();
 }
+
+function displayHighScores() {
+    const scoreList = document.getElementById("scoreList");
+    scoreList.innerHTML = "";
+
+    if (localStorage.getItem("highScores")) {
+        const scoresString = localStorage.getItem("highScores");
+        const scoresArray = scoresString.split(",");
+
+        // Convert the scores
+        const scoresObjects = scoresArray.map((scoreEntry) => {
+            const [initials, score] = scoreEntry.split(": ");
+            return { initials, score: parseInt(score) };
+        });
+
+        // Sort the scores 
+        scoresObjects.sort((a, b) => b.score - a.score);
+
+        scoresObjects.forEach((scoreEntry, index) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${scoreEntry.initials}: ${scoreEntry.score}`;
+            scoreList.appendChild(listItem);
+        });
+    }
+}
+
+window.onload = startGame;

@@ -1,7 +1,6 @@
-
-
-
 let timerInterval;
+
+
 // Questions and Answers
 const questions = [
     {
@@ -10,11 +9,26 @@ const questions = [
         correct: "No"
     },
     {
-        question: "",
-        options: [""],
-        correct: ""
+        question: "The condition in an if / else statement is enclosed in ____",
+        options: ["Quotes","Curly Brackets","Parentheses","Square Brackets"],
+        correct: "Parentheses"
     },
-    
+    {
+        question: "Commonly used data types do not include: ",
+        options: ["Strings","Booleans","Alerts","Numbers"],
+        correct: "Alerts"
+    },
+    {
+        question: "Arrays in JavaScript can be used to store _______",
+        options: ["Numbers and Strings","Other Arrays","Booleans","All of the Above"],
+        correct: "All of the Above"
+    },
+    {
+        question: "A very useful used during development and debugging for printing to the debugger is: ",
+        options: ["JavaScript","Terminal / Bash","For Loops","Console.Log"],
+        correct: "Console.Log"
+    },
+
 ];
 
 let currentQuestion = 0;
@@ -142,4 +156,6 @@ function displayHighScores() {
     }
 }
 
-window.onload = startGame;
+window.onload = function () {
+    displayHighScores(); // To load and display Highscores
+};
